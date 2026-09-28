@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <meta name="description" content="忘記切輸入法，打出 su3cl3 這種亂碼？把大千鍵盤亂碼還原成注音、拼音與中文，也能反向轉換。">
+  <title>注音亂碼翻譯機</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%231a5fb4'/%3E%3Ctext x='16' y='23' font-size='20' text-anchor='middle' fill='white' font-family='sans-serif'%3E%E3%84%85%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <h1>注音亂碼翻譯機</h1>
+      <p class="lead">忘記切輸入法，打成了 <code>su3cl3</code>？貼進來就能還原成「你好」。也可以反過來，把中文變成亂碼。</p>
+    </header>
+
+    <main>
+      <section class="panel" aria-labelledby="q-label">
+        <fieldset class="modes">
+          <legend class="sr-only">轉換方向</legend>
+          <label><input type="radio" name="mode" value="k" checked><span>亂碼 → 中文</span></label>
+          <label><input type="radio" name="mode" value="c"><span>中文 → 亂碼</span></label>
+        </fieldset>
+
+        <label id="q-label" for="q" class="field-label">貼上亂碼</label>
+        <textarea id="q" rows="3" spellcheck="false" autocomplete="off" autocapitalize="off" autocorrect="off" placeholder="例如：su3cl3"></textarea>
+
+        <div class="examples" role="group" aria-label="範例">
+          <span class="examples-label">範例</span>
+          <span id="examples"></span>
+        </div>
+
+        <div class="tools">
+          <label class="check"><input type="checkbox" id="digits" checked><span>整段數字（如 2024）當作一般數字</span></label>
+          <span class="spacer"></span>
+          <button type="button" class="btn" id="share">複製連結</button>
+          <button type="button" class="btn" id="clear">清除</button>
+        </div>
+      </section>
+
+      <div id="out" aria-live="polite"></div>
+      <p id="status" class="status" role="status"></p>
+    </main>
+
+    <footer>
+      <p>詞典讀音來自 <a href="https://cc-cedict.org/">CC-CEDICT</a>（CC BY-SA 4.0），詞頻來自 <a href="https://github.com/fxsjy/jieba">jieba</a>（MIT）。程式碼採 MIT 授權。
+      <a href="https://github.com/useless-husband/zhuyin-decoder">GitHub</a></p>
+    </footer>
+  </div>
+  <p id="copy-note" class="sr-only" role="status"></p>
+  <script type="module" src="src/app.js"></script>
+</body>
+</html>
