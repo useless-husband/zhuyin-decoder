@@ -115,6 +115,10 @@ test('緊接在音節後面的 5 仍是注音：u 後接 5 -> ㄓ', () => {
   assert.equal(zy('u 5 '), 'ㄧ ㄓ');
 });
 
+test('音節後面接較長的數字仍是數字', () => {
+  assert.equal(zy('o 2024'), 'ㄟ [raw:2024]');
+});
+
 test('非法音節不成立：ㄖㄚ、ㄅ 單獨', () => {
   assert.ok(!VALID_BASES.has('ㄖㄚ'));
   assert.ok(!VALID_BASES.has('ㄅ'));

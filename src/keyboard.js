@@ -65,11 +65,14 @@ export function keysToTokens(input, { digitsLiteral = true } = {}) {
   let sylEnd = -1; // 上一個音節結束的位置（緊接在音節後面的數字不算獨立數字）
   while (i < s.length) {
     const ch = s[i];
-    const runStart = (i === 0 || !isKeyChar(s[i - 1])) && i !== sylEnd;
+    const runStart = i === 0 || !isKeyChar(s[i - 1]);
+    const glued = i === sylEnd; // 緊接在音節（含吃掉的空白）後面
     if (digitsLiteral && runStart && /[0-9]/.test(ch)) {
       const run = /^[a-z0-9,./;-]+/i.exec(s.slice(i))[0];
       // 像 2024、3.14、1,000、2024-09-29 這種「數字加分隔符」才當一般數字
-      if (/^[0-9]+([.,/-][0-9]+)*$/.test(run)) { push('raw', run); i += run.length; continue; }
+      // 剛好接在音節後面的一兩個數字（例如「一之」= u 5 ）優先當注音
+      const numeric = /^[0-9]+([.,/-][0-9]+)*$/.test(run) && !(glued && run.length < 3);
+      if (numeric) { push('raw', run); i += run.length; continue; }
     }
     if (isKeyChar(ch)) {
       const t = trySyllable(s, i);
