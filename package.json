@@ -1,0 +1,14 @@
+{
+  "name": "zhuyin-decoder",
+  "version": "1.0.0",
+  "description": "注音亂碼翻譯機：把忘記切輸入法打出的亂碼還原成中文，也能反向轉換。",
+  "type": "module",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "test": "node --test",
+    "build:dict": "node scripts/build-dict.mjs",
+    "serve": "python3 -m http.server 8000"
+  },
+  "engines": { "node": ">=20" }
+}
